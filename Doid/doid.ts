@@ -1,0 +1,7 @@
+namespace doid {
+
+function getCommand(){
+
+}
+
+}
