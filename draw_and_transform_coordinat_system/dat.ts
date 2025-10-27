@@ -15,7 +15,7 @@ namespace CordSystemManipulation {
     function handleLoad(_event: Event): void {
         canvas = document.querySelector("canvas")!;
         crc = canvas.getContext("2d")!;
-        crc.fillStyle = "#588ee9ff";
+        crc.fillStyle = "#faead6";
         crc.fillRect(0, 0, canvas.width, canvas.height);
         drawCoordinateSystem();
         document.getElementById("btnRotate")!.addEventListener("click", rotate)!;
@@ -25,25 +25,21 @@ namespace CordSystemManipulation {
         document.getElementById("btnTranslatedown")!.addEventListener("click", movedown)!;
         document.getElementById("btnTranslateLeft")!.addEventListener("click", moveleft)!;
         document.getElementById("btnTranslateRight")!.addEventListener("click", moveright)!;
-        document.getElementById("btnReset")!.addEventListener("click", reset)!;
+        document.getElementById("btnrandscale")!.addEventListener("click", randscale)!;
     }
 
 
 
 
-
-
-
-
-
     function drawCoordinateSystem(): void {
+        const cordlenght: number = 300;
         crc.strokeStyle = getRandomColor();
-        crc.lineWidth = 1;
+        crc.lineWidth = 2;
         crc.beginPath();
         crc.moveTo(0, 0);
-        crc.lineTo(200, 0);
+        crc.lineTo(cordlenght, 0);
         crc.stroke();
-        for (let i: number = 0; i <= 200; i += 10) {
+        for (let i: number = 0; i <= cordlenght; i += 10) {
             crc.moveTo(i, 0);
             crc.lineTo(i, 5);
             crc.stroke();
@@ -52,8 +48,12 @@ namespace CordSystemManipulation {
             crc.stroke();
         }
         crc.moveTo(0, 0);
-        crc.lineTo(0, 200);
+        crc.lineTo(0, cordlenght);
         crc.stroke();
+    }
+    function getRandomColor(): string {
+        const randcolor: string = "#" + Math.floor(Math.random() * 16777215).toString(16);
+        return randcolor;
     }
     function rotate(): void {
         crc.rotate(20 * Math.PI / 180);
@@ -83,13 +83,11 @@ namespace CordSystemManipulation {
         crc.scale(0.9, 0.9);
         drawCoordinateSystem();
     }
-    function reset(): void {
-        crc.
-            drawCoordinateSystem();
-    }
-    function getRandomColor(): string {
-        const randcolor: string = "#" + Math.floor(Math.random() * 16777215).toString(16);
-        return randcolor;
+    function randscale(): void {
+        const scaleX: number = Math.random() * 2;
+        const scaleY: number = Math.random() * 2;
+        crc.scale(scaleX, scaleY);
+        drawCoordinateSystem();
     }
 }
 

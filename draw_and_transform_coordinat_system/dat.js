@@ -8,7 +8,7 @@ var CordSystemManipulation;
     function handleLoad(_event) {
         canvas = document.querySelector("canvas");
         crc = canvas.getContext("2d");
-        crc.fillStyle = "#588ee9ff";
+        crc.fillStyle = "#faead6";
         crc.fillRect(0, 0, canvas.width, canvas.height);
         drawCoordinateSystem();
         document.getElementById("btnRotate").addEventListener("click", rotate);
@@ -18,16 +18,17 @@ var CordSystemManipulation;
         document.getElementById("btnTranslatedown").addEventListener("click", movedown);
         document.getElementById("btnTranslateLeft").addEventListener("click", moveleft);
         document.getElementById("btnTranslateRight").addEventListener("click", moveright);
-        document.getElementById("btnReset").addEventListener("click", reset);
+        document.getElementById("btnrandscale").addEventListener("click", randscale);
     }
     function drawCoordinateSystem() {
+        const cordlenght = 300;
         crc.strokeStyle = getRandomColor();
-        crc.lineWidth = 1;
+        crc.lineWidth = 2;
         crc.beginPath();
         crc.moveTo(0, 0);
-        crc.lineTo(200, 0);
+        crc.lineTo(cordlenght, 0);
         crc.stroke();
-        for (let i = 0; i <= 200; i += 10) {
+        for (let i = 0; i <= cordlenght; i += 10) {
             crc.moveTo(i, 0);
             crc.lineTo(i, 5);
             crc.stroke();
@@ -36,8 +37,12 @@ var CordSystemManipulation;
             crc.stroke();
         }
         crc.moveTo(0, 0);
-        crc.lineTo(0, 200);
+        crc.lineTo(0, cordlenght);
         crc.stroke();
+    }
+    function getRandomColor() {
+        const randcolor = "#" + Math.floor(Math.random() * 16777215).toString(16);
+        return randcolor;
     }
     function rotate() {
         crc.rotate(20 * Math.PI / 180);
@@ -67,13 +72,11 @@ var CordSystemManipulation;
         crc.scale(0.9, 0.9);
         drawCoordinateSystem();
     }
-    function reset() {
-        crc.
-            drawCoordinateSystem();
-    }
-    function getRandomColor() {
-        const randcolor = "#" + Math.floor(Math.random() * 16777215).toString(16);
-        return randcolor;
+    function randscale() {
+        const scaleX = Math.random() * 2;
+        const scaleY = Math.random() * 2;
+        crc.scale(scaleX, scaleY);
+        drawCoordinateSystem();
     }
 })(CordSystemManipulation || (CordSystemManipulation = {}));
 //# sourceMappingURL=dat.js.map
