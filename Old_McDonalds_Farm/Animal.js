@@ -23,9 +23,10 @@ var OldMcDonaldsFarm;
             this.hunger = _hunger;
         }
         sing() {
-            return `Old MacDonald had a farm,\n
+            return `
+                    Old MacDonald had a farm,\n
                     Ee-aye, ee-aye, oh\n
-                    And on his/that farm he had a ${this.sound},\n
+                    And on his farm he had a ${this.name},\n
                     Ee-aye, ee-aye, oh\n
                     With a ${this.sound} ${this.sound} here and a ${this.sound} ${this.sound} there\n
                     Here a ${this.sound}, there a ${this.sound},\n
