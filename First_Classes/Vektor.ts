@@ -6,14 +6,14 @@ class Vector {
         this.set(_x, _y);
     }
 
-    set(_x: number, _y: number): void {
+    public set(_x: number, _y: number): void {
         this.x = _x;
         this.y = _y;
     }
-    scale(_factor: number): Vector {
+    public scale(_factor: number): Vector {
         return new Vector(this.x * _factor, this.y * _factor);
     }
-    add(_addend: Vector): void {
+    public add(_addend: Vector): void {
         this.x += _addend.x;
         this.y += _addend.y;
     }
