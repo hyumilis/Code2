@@ -26,6 +26,7 @@ namespace CordSystemManipulation {
         document.getElementById("btnTranslateLeft")!.addEventListener("click", moveleft)!;
         document.getElementById("btnTranslateRight")!.addEventListener("click", moveright)!;
         document.getElementById("btnrandscale")!.addEventListener("click", randscale)!;
+        document.getElementById("btncreaterefsquare")!.addEventListener("click", createReferenceSquare)!;
     }
 
 
@@ -50,6 +51,10 @@ namespace CordSystemManipulation {
         crc.moveTo(0, 0);
         crc.lineTo(0, cordlenght);
         crc.stroke();
+    }
+    function createReferenceSquare(): void {
+        crc.fillStyle = getRandomColor();
+        crc.fillRect(10, 10, 50, 50);
     }
     function getRandomColor(): string {
         const randcolor: string = "#" + Math.floor(Math.random() * 16777215).toString(16);
