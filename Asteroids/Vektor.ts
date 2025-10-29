@@ -11,8 +11,8 @@ namespace Asteroids {
             this.x = _x;
             this.y = _y;
         }
-        public scale(_factor: number): Vector {
-            return new Vector(this.x * _factor, this.y * _factor);
+        public scale(_fac: number): Vector {
+            return new Vector(this.x * _fac, this.y * _fac);
         }
         public add(_addend: Vector): void {
             this.x += _addend.x;
