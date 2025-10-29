@@ -11,7 +11,7 @@ namespace Classes {
             this.x = _x;
             this.y = _y;
         }
-        public scale(_fac: number): Vector {
+        public scale(_fac: number): void {
             this.x *= _fac;
             this.y *= _fac;
         }

@@ -19,5 +19,7 @@ namespace Asteroids {
         crc2.lineWidth = 2;
         createPaths();
 
+        let asteroid: Asteroid = new Asteroid();
+        asteroid.draw();
     }
 }
