@@ -4,8 +4,6 @@ namespace Asteroids {
     export let crc2: CanvasRenderingContext2D;
 
 
-
-
     //window.setTimeout(handleLoad, 20);
     function handleLoad(_event: Event): void {
         let canvas: HTMLCanvasElement | null = document.getElementById("playfield") as HTMLCanvasElement;
@@ -17,9 +15,10 @@ namespace Asteroids {
         crc2.fillStyle = "black";
         crc2.strokeStyle = "white";
         crc2.lineWidth = 2;
-        createPaths();
+
 
         let asteroid: Asteroid = new Asteroid();
         asteroid.draw();
+        asteroid.move(1 / 50);
     }
 }

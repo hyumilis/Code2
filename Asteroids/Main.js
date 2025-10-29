@@ -13,9 +13,9 @@ var Asteroids;
         Asteroids.crc2.fillStyle = "black";
         Asteroids.crc2.strokeStyle = "white";
         Asteroids.crc2.lineWidth = 2;
-        Asteroids.createPaths();
         let asteroid = new Asteroids.Asteroid();
         asteroid.draw();
+        asteroid.move(1 / 50);
     }
 })(Asteroids || (Asteroids = {}));
 //# sourceMappingURL=Main.js.map
