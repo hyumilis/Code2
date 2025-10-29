@@ -12,7 +12,8 @@ var Asteroids;
             this.y = _y;
         }
         scale(_fac) {
-            return new Vector(this.x * _fac, this.y * _fac);
+            this.x *= _fac;
+            this.y *= _fac;
         }
         add(_addend) {
             this.x += _addend.x;

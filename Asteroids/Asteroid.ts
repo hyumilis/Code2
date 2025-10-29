@@ -21,7 +21,7 @@ namespace Asteroids {
             crc2.save();
             crc2.translate(this.pos.x, this.pos.y);
             crc2.scale(this.size, this.size);
-            crc2.stroke(Asteroids.asteroidPaths[this.Type]);
+            crc2.stroke(asteroidPaths[this.Type]);
             crc2.restore();
         }
         private randomvelocityvalue(_min: number, _max: number): number {
