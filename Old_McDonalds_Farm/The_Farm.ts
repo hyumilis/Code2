@@ -18,6 +18,7 @@ namespace OldMcDonaldsFarm {
         console.log("Food stocks after feeding:");
         printfoodstock();
         restocklowfood();
+        dospecial();
         console.log("Food stocks after restocking:");
         printfoodstock();
     }
@@ -32,15 +33,15 @@ namespace OldMcDonaldsFarm {
         foods.push(pollen);
     }
     function createanimals(): void {
-        let berta = new Animal("Berta", Species.Cow, "Moo", "Grass", 2);
+        let berta = new Cow("Berta", 2);
         animals.push(berta);
-        let marvin = new Animal("Marvin", Species.Bee, "Bzz", "Pollen", 42);
+        let marvin = new Bee("Marvin", 42);
         animals.push(marvin);
-        let sissie = new Animal("Sissie", Species.Pig, "Oink", "Slop", 2);
+        let sissie = new Pig("Sissie", 2);
         animals.push(sissie);
-        let franzi = new Animal("Franzi", Species.Sheep, "Baa", "Grass", 1);
+        let franzi = new Sheep("Franzi", 1);
         animals.push(franzi);
-        let lian = new Animal("Lian", Species.Duck, "Quack", "HardCorn", Math.floor(Math.random() * 69));
+        let lian = new Duck("Lian", Math.floor(Math.random() * 69));
         animals.push(lian);
     }
     function printfoodstock(): void {
@@ -71,6 +72,10 @@ namespace OldMcDonaldsFarm {
                 foods[i].refill();
             }
         }
-
+    }
+    function dospecial(): void {
+        for (let i = 0; i < animals.length; i++) {
+            animals[i].doSpecialAction();
+        }
     }
 }

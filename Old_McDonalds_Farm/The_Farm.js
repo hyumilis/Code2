@@ -18,6 +18,7 @@ var OldMcDonaldsFarm;
         console.log("Food stocks after feeding:");
         printfoodstock();
         restocklowfood();
+        dospecial();
         console.log("Food stocks after restocking:");
         printfoodstock();
     }
@@ -32,15 +33,15 @@ var OldMcDonaldsFarm;
         foods.push(pollen);
     }
     function createanimals() {
-        let berta = new OldMcDonaldsFarm.Animal("Berta", OldMcDonaldsFarm.Species.Cow, "Moo", "Grass", 2);
+        let berta = new OldMcDonaldsFarm.Cow("Berta", 2);
         animals.push(berta);
-        let marvin = new OldMcDonaldsFarm.Animal("Marvin", OldMcDonaldsFarm.Species.Bee, "Bzz", "Pollen", 42);
+        let marvin = new OldMcDonaldsFarm.Bee("Marvin", 42);
         animals.push(marvin);
-        let sissie = new OldMcDonaldsFarm.Animal("Sissie", OldMcDonaldsFarm.Species.Pig, "Oink", "Slop", 2);
+        let sissie = new OldMcDonaldsFarm.Pig("Sissie", 2);
         animals.push(sissie);
-        let franzi = new OldMcDonaldsFarm.Animal("Franzi", OldMcDonaldsFarm.Species.Sheep, "Baa", "Grass", 1);
+        let franzi = new OldMcDonaldsFarm.Sheep("Franzi", 1);
         animals.push(franzi);
-        let lian = new OldMcDonaldsFarm.Animal("Lian", OldMcDonaldsFarm.Species.Duck, "Quack", "HardCorn", Math.floor(Math.random() * 69));
+        let lian = new OldMcDonaldsFarm.Duck("Lian", Math.floor(Math.random() * 69));
         animals.push(lian);
     }
     function printfoodstock() {
@@ -70,6 +71,11 @@ var OldMcDonaldsFarm;
                 let restockamount = 100 - foods[i].quantity;
                 foods[i].refill();
             }
+        }
+    }
+    function dospecial() {
+        for (let i = 0; i < animals.length; i++) {
+            animals[i].doSpecialAction();
         }
     }
 })(OldMcDonaldsFarm || (OldMcDonaldsFarm = {}));
