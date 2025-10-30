@@ -19,6 +19,9 @@ var Asteroids;
             this.x += _addend.x;
             this.y += _addend.y;
         }
+        length() {
+            return Math.sqrt(this.x * this.x + this.y * this.y);
+        }
     }
     Asteroids.Vector = Vector;
 })(Asteroids || (Asteroids = {}));

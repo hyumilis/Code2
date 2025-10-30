@@ -19,5 +19,8 @@ namespace Asteroids {
             this.x += _addend.x;
             this.y += _addend.y;
         }
+        public length(): number {
+            return Math.sqrt(this.x * this.x + this.y * this.y);
+        }
     }
 }
