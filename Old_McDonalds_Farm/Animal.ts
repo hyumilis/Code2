@@ -69,7 +69,7 @@ namespace OldMcDonaldsFarm {
         public constructor(_name: string, _hunger: number) {
             super(_name, Species.Sheep, "baa", "grass", _hunger);
         }
-        public doSpecialAction() {
+        public doSpecialAction(): number {
             console.log( `${this.name} says: Baa baa! Here's some warm wool for you!`);
             return Math.floor(Math.random() * 2 + 1);
         }
