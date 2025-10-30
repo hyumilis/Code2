@@ -20,7 +20,7 @@ var Asteroids;
         Asteroids.crc2.fillRect(0, 0, Asteroids.crc2.canvas.width, Asteroids.crc2.canvas.height);
         let ship = new Asteroids.Ship();
         ship.draw();
-        createAsteroids();
+        createAsteroids(5);
         for (let asteroid of asteroids) {
             asteroid.move(1 / 50);
             asteroid.draw();

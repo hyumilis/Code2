@@ -24,7 +24,7 @@ namespace Asteroids {
         crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height);
         let ship: Ship = new Ship();
         ship.draw();
-        createAsteroids();
+        createAsteroids(5);
         for (let asteroid of asteroids) {
             asteroid.move(1 / 50);
             asteroid.draw();

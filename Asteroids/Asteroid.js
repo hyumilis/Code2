@@ -5,12 +5,12 @@ var Asteroids;
         pos;
         vel;
         size;
-        Type;
+        type;
         constructor() {
             this.pos = new Asteroids.Vector(0, Math.floor(Math.random() * Asteroids.crc2.canvas.height));
             this.vel = new Asteroids.Vector(this.randomvelocityvalue(10, 40), this.randomvelocityvalue(10, 40));
             this.size = this.chosetype();
-            this.Type = Math.floor(Math.random() * 4);
+            this.type = Math.floor(Math.random() * 4);
         }
         move(_timeslice) {
             const offset = new Asteroids.Vector(this.vel.x, this.vel.y);
@@ -31,7 +31,7 @@ var Asteroids;
             Asteroids.crc2.translate(this.pos.x, this.pos.y);
             Asteroids.crc2.scale(this.size, this.size);
             Asteroids.crc2.translate(-50, -50);
-            Asteroids.crc2.stroke(Asteroids.asteroidPaths[this.Type]);
+            Asteroids.crc2.stroke(Asteroids.asteroidPaths[this.type]);
             Asteroids.crc2.restore();
         }
         randomvelocityvalue(_min, _max) {
