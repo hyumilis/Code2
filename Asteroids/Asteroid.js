@@ -34,6 +34,15 @@ var Asteroids;
             Asteroids.crc2.stroke(Asteroids.asteroidPaths[this.type]);
             Asteroids.crc2.restore();
         }
+        isHit(_hotspot) {
+            let hitsize = 50 * this.size;
+            let difference = new Asteroids.Vector(_hotspot.x - this.pos.x, _hotspot.y - this.pos.y);
+            let distance = Math.sqrt((difference.x * difference.x) + (difference.y * difference.y));
+            if (distance < hitsize) {
+                return true;
+            }
+            return false;
+        }
         randomvelocityvalue(_min, _max) {
             const value = Math.random() * (_max - _min) + _min;
             const direction = Math.random() < 0.5 ? -1 : 1;

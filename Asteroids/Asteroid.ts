@@ -34,6 +34,15 @@ namespace Asteroids {
             crc2.stroke(asteroidPaths[this.type]);
             crc2.restore();
         }
+        public isHit(_hotspot: Vector): boolean {
+            let hitsize: number = 50 * this.size;
+            let difference: Vector = new Vector(_hotspot.x - this.pos.x, _hotspot.y - this.pos.y);
+            let distance: number = Math.sqrt((difference.x * difference.x) + (difference.y * difference.y));
+            if (distance < hitsize) {
+                return true;
+            }
+            return false;
+        }
         private randomvelocityvalue(_min: number, _max: number): number {
             const value: number = Math.random() * (_max - _min) + _min;
             const direction: number = Math.random() < 0.5 ? -1 : 1;
