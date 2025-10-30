@@ -24,6 +24,7 @@ namespace Asteroids {
                 this.pos.x -= crc2.canvas.width;
             if (this.pos.y > crc2.canvas.height)
                 this.pos.y -= crc2.canvas.height;
+            console.log(this.pos);
         }
         public draw(): void {
             crc2.save();

@@ -24,6 +24,7 @@ var Asteroids;
                 this.pos.x -= Asteroids.crc2.canvas.width;
             if (this.pos.y > Asteroids.crc2.canvas.height)
                 this.pos.y -= Asteroids.crc2.canvas.height;
+            console.log(this.pos);
         }
         draw() {
             Asteroids.crc2.save();
