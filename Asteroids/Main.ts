@@ -9,6 +9,7 @@ namespace Asteroids {
         if (!canvas) {
             return;
         }
+        createPaths();
         crc2 = canvas.getContext("2d") as CanvasRenderingContext2D;
         crc2.fillStyle = "black";
         crc2.strokeStyle = "white";
@@ -18,8 +19,8 @@ namespace Asteroids {
         canvas.addEventListener("mouseup", shootLaser);
         //canvas.addEventListener("keypress", handleKeypress);
         //canvas.addEventListener("mousemove", setHeading);
-
         console.log("Loaded");
+        createAsteroids(5);
         window.setInterval(update, 20);
     }
 
@@ -29,7 +30,6 @@ namespace Asteroids {
         crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height);
         let ship: Ship = new Ship();
         ship.draw();
-        createAsteroids(5);
         for (let asteroid of asteroids) {
             asteroid.move(1 / 50);
             asteroid.draw();
@@ -60,11 +60,17 @@ namespace Asteroids {
     }
 
     function breakAsteroid(_asteroid: Asteroid): void {
-        console.log("Break asteroid");
-        let index: number = asteroids.indexOf(_asteroid);
-        if (index > -1) {
-            asteroids.splice(index, 1);
+        if (_asteroid.size > 0.3) {
+            for (let i: number = 0; i < Math.floor(Math.random() * 3 + 1); i++) {
+                let fragment: Asteroid = new Asteroid();
+                fragment.size = _asteroid.size / 2;
+                fragment.pos.set(_asteroid.pos.x, _asteroid.pos.y);
+                fragment.vel.set(fragment.randomvelocityvalue(_asteroid.vel.x, _asteroid.vel.x*2), fragment.randomvelocityvalue(_asteroid.vel.y, _asteroid.vel.y*2));
+                asteroids.push(fragment);
+            }
         }
+        let index: number = asteroids.indexOf(_asteroid);
+        asteroids.splice(index, 1);
     }
 
     function createAsteroids(_nAsteroids: number): void {

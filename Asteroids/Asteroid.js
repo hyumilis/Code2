@@ -9,7 +9,7 @@ var Asteroids;
         constructor() {
             this.pos = new Asteroids.Vector(0, Math.floor(Math.random() * Asteroids.crc2.canvas.height));
             this.vel = new Asteroids.Vector(this.randomvelocityvalue(10, 40), this.randomvelocityvalue(10, 40));
-            this.size = this.chosetype();
+            this.size = Math.random() * 1.2;
             this.type = Math.floor(Math.random() * 4);
         }
         move(_timeslice) {
@@ -24,7 +24,6 @@ var Asteroids;
                 this.pos.x -= Asteroids.crc2.canvas.width;
             if (this.pos.y > Asteroids.crc2.canvas.height)
                 this.pos.y -= Asteroids.crc2.canvas.height;
-            console.log(this.pos);
         }
         draw() {
             Asteroids.crc2.save();
@@ -48,13 +47,6 @@ var Asteroids;
             const direction = Math.random() < 0.5 ? -1 : 1;
             const returnvalue = value * direction;
             return returnvalue;
-        }
-        chosetype() {
-            const chosentype = Math.floor(Math.random() * 4);
-            if (chosentype == 0) {
-                return 3;
-            }
-            return chosentype;
         }
     }
     Asteroids.Asteroid = Asteroid;

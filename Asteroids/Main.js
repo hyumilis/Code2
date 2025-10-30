@@ -8,6 +8,7 @@ var Asteroids;
         if (!canvas) {
             return;
         }
+        Asteroids.createPaths();
         Asteroids.crc2 = canvas.getContext("2d");
         Asteroids.crc2.fillStyle = "black";
         Asteroids.crc2.strokeStyle = "white";
@@ -17,6 +18,7 @@ var Asteroids;
         //canvas.addEventListener("keypress", handleKeypress);
         //canvas.addEventListener("mousemove", setHeading);
         console.log("Loaded");
+        createAsteroids(5);
         window.setInterval(update, 20);
     }
     function update() {
@@ -24,7 +26,6 @@ var Asteroids;
         Asteroids.crc2.fillRect(0, 0, Asteroids.crc2.canvas.width, Asteroids.crc2.canvas.height);
         let ship = new Asteroids.Ship();
         ship.draw();
-        createAsteroids(5);
         for (let asteroid of asteroids) {
             asteroid.move(1 / 50);
             asteroid.draw();
@@ -50,11 +51,17 @@ var Asteroids;
         return null;
     }
     function breakAsteroid(_asteroid) {
-        console.log("Break asteroid");
-        let index = asteroids.indexOf(_asteroid);
-        if (index > -1) {
-            asteroids.splice(index, 1);
+        if (_asteroid.size > 0.3) {
+            for (let i = 0; i < Math.floor(Math.random() * 3 + 1); i++) {
+                let fragment = new Asteroids.Asteroid();
+                fragment.size = _asteroid.size / 2;
+                fragment.pos.set(_asteroid.pos.x, _asteroid.pos.y);
+                fragment.vel.set(fragment.randomvelocityvalue(_asteroid.vel.x, _asteroid.vel.x * 2), fragment.randomvelocityvalue(_asteroid.vel.y, _asteroid.vel.y * 2));
+                asteroids.push(fragment);
+            }
         }
+        let index = asteroids.indexOf(_asteroid);
+        asteroids.splice(index, 1);
     }
     function createAsteroids(_nAsteroids) {
         for (let i = 0; i < _nAsteroids; i++) {
