@@ -18,17 +18,21 @@ var Asteroids;
         //canvas.addEventListener("keypress", handleKeypress);
         //canvas.addEventListener("mousemove", setHeading);
         console.log("Loaded");
-        createAsteroids(5);
+        createAsteroids(3);
         window.setInterval(update, 20);
     }
     function update() {
         console.log("Update");
         Asteroids.crc2.fillRect(0, 0, Asteroids.crc2.canvas.width, Asteroids.crc2.canvas.height);
         let ship = new Asteroids.Ship();
+        Asteroids.crc2.lineWidth = 2;
         ship.draw();
         for (let asteroid of asteroids) {
             asteroid.move(1 / 50);
             asteroid.draw();
+        }
+        if (asteroids.length < 4) {
+            createAsteroids(2);
         }
     }
     function shootLaser(_event) {
@@ -51,7 +55,7 @@ var Asteroids;
         return null;
     }
     function breakAsteroid(_asteroid) {
-        if (_asteroid.size > 0.3) {
+        if (_asteroid.size > 0.5) {
             for (let i = 0; i < Math.floor(Math.random() * 3 + 1); i++) {
                 let fragment = new Asteroids.Asteroid();
                 fragment.size = _asteroid.size / 2;

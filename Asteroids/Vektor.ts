@@ -22,5 +22,8 @@ namespace Asteroids {
         public length(): number {
             return Math.sqrt(this.x * this.x + this.y * this.y);
         }
+        public copy(): Vector {
+            return new Vector(this.x, this.y);
+        }
     }
 }

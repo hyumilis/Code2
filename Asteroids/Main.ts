@@ -20,7 +20,7 @@ namespace Asteroids {
         //canvas.addEventListener("keypress", handleKeypress);
         //canvas.addEventListener("mousemove", setHeading);
         console.log("Loaded");
-        createAsteroids(5);
+        createAsteroids(3);
         window.setInterval(update, 20);
     }
 
@@ -29,10 +29,14 @@ namespace Asteroids {
         console.log("Update");
         crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height);
         let ship: Ship = new Ship();
+        crc2.lineWidth = 2;
         ship.draw();
         for (let asteroid of asteroids) {
             asteroid.move(1 / 50);
             asteroid.draw();
+        }
+        if (asteroids.length < 4) {
+            createAsteroids(2);
         }
 
     }
@@ -60,12 +64,12 @@ namespace Asteroids {
     }
 
     function breakAsteroid(_asteroid: Asteroid): void {
-        if (_asteroid.size > 0.3) {
+        if (_asteroid.size > 0.5) {
             for (let i: number = 0; i < Math.floor(Math.random() * 3 + 1); i++) {
                 let fragment: Asteroid = new Asteroid();
                 fragment.size = _asteroid.size / 2;
                 fragment.pos.set(_asteroid.pos.x, _asteroid.pos.y);
-                fragment.vel.set(fragment.randomvelocityvalue(_asteroid.vel.x, _asteroid.vel.x*2), fragment.randomvelocityvalue(_asteroid.vel.y, _asteroid.vel.y*2));
+                fragment.vel.set(fragment.randomvelocityvalue(_asteroid.vel.x, _asteroid.vel.x * 2), fragment.randomvelocityvalue(_asteroid.vel.y, _asteroid.vel.y * 2));
                 asteroids.push(fragment);
             }
         }
