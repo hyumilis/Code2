@@ -3,7 +3,7 @@ var Asteroids;
 (function (Asteroids) {
     window.addEventListener("load", handleLoad);
     let movables = [];
-    let projectile;
+    let rep = 0;
     function handleLoad(_event) {
         let canvas = document.getElementById("playfield");
         if (!canvas) {
@@ -24,7 +24,9 @@ var Asteroids;
     }
     function update() {
         console.log("Update");
+        rep++;
         let asteroidcount = 0;
+        let ufocount = 0;
         Asteroids.crc2.fillRect(0, 0, Asteroids.crc2.canvas.width, Asteroids.crc2.canvas.height);
         let ship = new Asteroids.Ship();
         Asteroids.crc2.lineWidth = 2;
@@ -35,9 +37,16 @@ var Asteroids;
             if (instance instanceof Asteroids.Asteroid) {
                 asteroidcount++;
             }
+            if (instance instanceof Asteroids.Ufo) {
+                ufocount++;
+            }
         }
+        deleteexpanables();
         if (asteroidcount < 4) {
             createAsteroids(2);
+        }
+        if (rep % 50 == 0 && ufocount < 3) {
+            createUfo();
         }
     }
     function shootLaser(_event) {
@@ -52,9 +61,12 @@ var Asteroids;
         Asteroids.crc2.stroke();
     }
     function getAsteroidHit(_hotspot) {
-        for (let asteroid of movables) {
-            if (asteroid instanceof Asteroids.Asteroid && asteroid.isHit(_hotspot)) {
-                return asteroid;
+        for (let instance of movables) {
+            if (instance instanceof Asteroids.Asteroid && instance.isHit(_hotspot)) {
+                return instance;
+            }
+            else if (instance instanceof Asteroids.Ufo && instance.isHit(_hotspot)) {
+                instance.isHit;
             }
         }
         return null;
@@ -69,8 +81,7 @@ var Asteroids;
                 movables.push(fragment);
             }
         }
-        let index = movables.indexOf(_asteroid);
-        movables.splice(index, 1);
+        _asteroid.expandeble = true;
     }
     function createAsteroids(_nAsteroids) {
         for (let i = 0; i < _nAsteroids; i++) {
@@ -78,12 +89,23 @@ var Asteroids;
             movables.push(asteroid);
         }
     }
+    function createUfo() {
+        let newufo = new Asteroids.Ufo;
+        movables.push(newufo);
+    }
     function shootproj(_event) {
         console.log("Shoot Projectile");
         let origin = new Asteroids.Vector(_event.clientX - Asteroids.crc2.canvas.offsetLeft, _event.clientY - Asteroids.crc2.canvas.offsetTop);
         let vel = new Asteroids.Vector(0, 0);
         vel.random(100, 100);
-        projectile = new Asteroids.Projectile(origin, vel);
+        let proj = new Asteroids.Projectile(origin, vel);
+        movables.push(proj);
+    }
+    function deleteexpanables() {
+        for (let i = movables.length - 1; i >= 0; i--)
+            if (movables[i].expandeble) {
+                movables.splice(i, 1);
+            }
     }
 })(Asteroids || (Asteroids = {}));
 //# sourceMappingURL=Main.js.map

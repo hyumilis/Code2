@@ -2,7 +2,7 @@ namespace Asteroids {
     window.addEventListener("load", handleLoad);
     export let crc2: CanvasRenderingContext2D;
     let movables: Movable[] = [];
-    let projectile: Projectile;
+    let rep: number = 0;
 
 
     function handleLoad(_event: Event): void {
@@ -28,7 +28,9 @@ namespace Asteroids {
 
     function update(): void {
         console.log("Update");
+        rep++;
         let asteroidcount: number = 0;
+        let ufocount: number = 0;
         crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height);
         let ship: Ship = new Ship();
         crc2.lineWidth = 2;
@@ -36,12 +38,20 @@ namespace Asteroids {
         for (let instance of movables) {
             instance.move(1 / 50);
             instance.draw();
-            if(instance instanceof Asteroid){
-                asteroidcount ++;
+            if (instance instanceof Asteroid) {
+                asteroidcount++;
             }
+            if (instance instanceof Ufo) {
+                ufocount++;
+            }
+
         }
+        deleteexpanables();
         if (asteroidcount < 4) {
             createAsteroids(2);
+        }
+        if (rep % 50 == 0 && ufocount < 3) {
+            createUfo()
         }
 
     }
@@ -60,9 +70,12 @@ namespace Asteroids {
     }
 
     function getAsteroidHit(_hotspot: Vector): Asteroid | null {
-        for (let asteroid of movables) {
-            if (asteroid instanceof Asteroid && asteroid.isHit(_hotspot)) {
-                return asteroid;
+        for (let instance of movables) {
+            if (instance instanceof Asteroid && instance.isHit(_hotspot)) {
+                return instance;
+            }
+            else if (instance instanceof Ufo && instance.isHit(_hotspot)) {
+                instance.isHit;
             }
         }
         return null;
@@ -78,8 +91,7 @@ namespace Asteroids {
                 movables.push(fragment);
             }
         }
-        let index: number = movables.indexOf(_asteroid);
-        movables.splice(index, 1);
+        _asteroid.expandeble = true;
     }
 
     function createAsteroids(_nAsteroids: number): void {
@@ -88,11 +100,25 @@ namespace Asteroids {
             movables.push(asteroid);
         }
     }
+
+    function createUfo(){
+        let newufo: Ufo = new Ufo;
+        movables.push(newufo);
+    }
+
     function shootproj(_event: MouseEvent): void {
         console.log("Shoot Projectile");
         let origin: Vector = new Vector(_event.clientX - crc2.canvas.offsetLeft, _event.clientY - crc2.canvas.offsetTop);
         let vel: Vector = new Vector(0, 0);
         vel.random(100, 100);
-        projectile = new Projectile(origin, vel);
+        let proj = new Projectile(origin, vel);
+        movables.push(proj);
+    }
+
+    function deleteexpanables() {
+        for (let i: number = movables.length - 1; i >= 0; i--)
+            if (movables[i].expandeble) {
+                movables.splice(i, 1);
+            }
     }
 }
