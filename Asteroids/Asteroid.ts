@@ -7,7 +7,7 @@ namespace Asteroids {
         public type: number;
 
         public constructor() {
-            this.pos = new Vector(0, Math.floor(Math.random() * crc2.canvas.height));
+            this.pos = new Vector(Math.floor(Math.random() * crc2.canvas.width), 0);
             this.vel = new Vector(this.randomvelocityvalue(10, 40), this.randomvelocityvalue(10, 40));
             this.size = Math.random() * 1 + 0.5;
             this.type = Math.floor(Math.random() * 4);

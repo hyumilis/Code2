@@ -59,7 +59,7 @@ var Asteroids;
             for (let i = 0; i < Math.floor(Math.random() * 3 + 1); i++) {
                 let fragment = new Asteroids.Asteroid();
                 fragment.size = _asteroid.size / 2;
-                fragment.pos.set(_asteroid.pos.x, _asteroid.pos.y);
+                fragment.pos = _asteroid.pos.copy();
                 fragment.vel.set(fragment.randomvelocityvalue(_asteroid.vel.x, _asteroid.vel.x * 2), fragment.randomvelocityvalue(_asteroid.vel.y, _asteroid.vel.y * 2));
                 asteroids.push(fragment);
             }

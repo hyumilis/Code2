@@ -7,7 +7,7 @@ var Asteroids;
         size;
         type;
         constructor() {
-            this.pos = new Asteroids.Vector(0, Math.floor(Math.random() * Asteroids.crc2.canvas.height));
+            this.pos = new Asteroids.Vector(Math.floor(Math.random() * Asteroids.crc2.canvas.width), 0);
             this.vel = new Asteroids.Vector(this.randomvelocityvalue(10, 40), this.randomvelocityvalue(10, 40));
             this.size = Math.random() * 1 + 0.5;
             this.type = Math.floor(Math.random() * 4);
