@@ -1,12 +1,10 @@
 "use strict";
 var Asteroids;
 (function (Asteroids) {
-    class Asteroid {
-        pos;
-        vel;
+    class Asteroid extends Asteroids.Movable {
         size;
         type;
-        constructor() {
+        super() {
             this.pos = new Asteroids.Vector(Math.floor(Math.random() * Asteroids.crc2.canvas.width), 0);
             this.vel = new Asteroids.Vector(this.randomvelocityvalue(10, 40), this.randomvelocityvalue(10, 40));
             this.size = Math.random() * 1 + 0.5;
@@ -42,12 +40,6 @@ var Asteroids;
                 return true;
             }
             return false;
-        }
-        randomvelocityvalue(_min, _max) {
-            const value = Math.random() * (_max - _min) + _min;
-            const direction = Math.random() < 0.5 ? -1 : 1;
-            const returnvalue = value * direction;
-            return returnvalue;
         }
     }
     Asteroids.Asteroid = Asteroid;

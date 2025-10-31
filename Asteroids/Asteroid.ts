@@ -1,12 +1,10 @@
 namespace Asteroids {
 
-    export class Asteroid {
-        public pos: Vector;
-        public vel: Vector;
+    export class Asteroid extends Movable {
         public size: number;
         public type: number;
 
-        public constructor() {
+        public super() {
             this.pos = new Vector(Math.floor(Math.random() * crc2.canvas.width), 0);
             this.vel = new Vector(this.randomvelocityvalue(10, 40), this.randomvelocityvalue(10, 40));
             this.size = Math.random() * 1 + 0.5;
@@ -42,12 +40,6 @@ namespace Asteroids {
                 return true;
             }
             return false;
-        }
-        public randomvelocityvalue(_min: number, _max: number): number {
-            const value: number = Math.random() * (_max - _min) + _min;
-            const direction: number = Math.random() < 0.5 ? -1 : 1;
-            const returnvalue: number = value * direction;
-            return returnvalue;
         }
     }
 }
