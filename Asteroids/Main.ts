@@ -15,7 +15,7 @@ namespace Asteroids {
         crc2.strokeStyle = "white";
         crc2.lineWidth = 2;
 
-        //canvas.addEventListener("mousedown", loadlaser);
+        canvas.addEventListener("mousedown", shootproj);
         canvas.addEventListener("mouseup", shootLaser);
         //canvas.addEventListener("keypress", handleKeypress);
         //canvas.addEventListener("mousemove", setHeading);
@@ -82,5 +82,12 @@ namespace Asteroids {
             let asteroid: Asteroid = new Asteroid();
             asteroids.push(asteroid);
         }
+    }
+    function shootproj(_event: MouseEvent): void {
+        console.log("Shoot Projectile");
+        let origin: Vector = new Vector(_event.clientX- crc2.canvas.offsetLeft, _event.clientY - crc2.canvas.offsetTop);
+        let vel: Vector = new Vector(0,0);
+        vel.random(100,100);
+        projectile = new Projectile(origin, vel);
     }
 }

@@ -1,6 +1,8 @@
 namespace Asteroids {
     export let asteroidPaths: Path2D[];
     export let ufoPath: Path2D;
+    export let shipPath: Path2D;
+    export let exposionPath: Path2D;
 
     export let shapesAsteroids: number[][][] = [
         [
@@ -20,6 +22,8 @@ namespace Asteroids {
     export function createPaths(): void {
         asteroidPaths = createAsteroidPaths(shapesAsteroids);
         ufoPath = createUfoPath();
+        shipPath = createShipPath();
+        exposionPath = createExplosionPath();
     }
 
     function createAsteroidPaths(_shapes: number[][][]): Path2D[] {
@@ -59,6 +63,28 @@ namespace Asteroids {
 
         path.moveTo(4, 25);
         path.lineTo(59, 25);
+        path.closePath();
+        return path;
+    }
+    function createShipPath(): Path2D {
+        let path: Path2D = new Path2D();
+        path.moveTo(15, 0);
+        path.lineTo(-10, -10);
+        path.lineTo(-5, 0);
+        path.lineTo(-10, 10);
+        path.closePath();
+        return path;
+    }
+    function createExplosionPath(): Path2D {
+        let path: Path2D = new Path2D();
+        path.moveTo(0, -30);
+        path.lineTo(10, -10);
+        path.lineTo(30, 0);
+        path.lineTo(10, 10);
+        path.lineTo(0, 30);
+        path.lineTo(-10, 10);
+        path.lineTo(-30, 0);
+        path.lineTo(-10, -10);
         path.closePath();
         return path;
     }

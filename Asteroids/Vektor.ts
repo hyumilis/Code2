@@ -25,5 +25,13 @@ namespace Asteroids {
         public copy(): Vector {
             return new Vector(this.x, this.y);
         }
+        public random(_maxX: number, _maxY: number): void {
+            this.x = Math.random() * _maxX;
+            this.y = Math.random() * _maxY;
+        }
+        public roundrandom(_maxX: number, _maxY: number): void {
+            this.x = Math.floor(Math.random() * (_maxX + 1));
+            this.y = Math.floor(Math.random() * (_maxY + 1));
+        }
     }
 }

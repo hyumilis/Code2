@@ -13,7 +13,7 @@ var Asteroids;
         Asteroids.crc2.fillStyle = "black";
         Asteroids.crc2.strokeStyle = "white";
         Asteroids.crc2.lineWidth = 2;
-        //canvas.addEventListener("mousedown", loadlaser);
+        canvas.addEventListener("mousedown", shootproj);
         canvas.addEventListener("mouseup", shootLaser);
         //canvas.addEventListener("keypress", handleKeypress);
         //canvas.addEventListener("mousemove", setHeading);
@@ -72,6 +72,13 @@ var Asteroids;
             let asteroid = new Asteroids.Asteroid();
             asteroids.push(asteroid);
         }
+    }
+    function shootproj(_event) {
+        console.log("Shoot Projectile");
+        let origin = new Asteroids.Vector(_event.clientX - Asteroids.crc2.canvas.offsetLeft, _event.clientY - Asteroids.crc2.canvas.offsetTop);
+        let vel = new Asteroids.Vector(0, 0);
+        vel.random(100, 100);
+        projectile = new Asteroids.Projectile(origin, vel);
     }
 })(Asteroids || (Asteroids = {}));
 //# sourceMappingURL=Main.js.map

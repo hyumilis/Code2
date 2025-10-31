@@ -7,17 +7,9 @@ namespace Asteroids {
         public draw(): void {
             crc2.save();
             crc2.translate(this.pos.x, this.pos.y);
-            crc2.stroke(this.createShipPath());
+            crc2.stroke(shipPath);
             crc2.restore();
         }
-        private createShipPath(): Path2D {
-            let path: Path2D = new Path2D();
-            path.moveTo(15, 0);
-            path.lineTo(-10, -10);
-            path.lineTo(-5, 0);
-            path.lineTo(-10, 10);
-            path.closePath();
-            return path;
-        }
+
     }
 }

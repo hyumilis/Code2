@@ -9,17 +9,8 @@ var Asteroids;
         draw() {
             Asteroids.crc2.save();
             Asteroids.crc2.translate(this.pos.x, this.pos.y);
-            Asteroids.crc2.stroke(this.createShipPath());
+            Asteroids.crc2.stroke(Asteroids.shipPath);
             Asteroids.crc2.restore();
-        }
-        createShipPath() {
-            let path = new Path2D();
-            path.moveTo(15, 0);
-            path.lineTo(-10, -10);
-            path.lineTo(-5, 0);
-            path.lineTo(-10, 10);
-            path.closePath();
-            return path;
         }
     }
     Asteroids.Ship = Ship;

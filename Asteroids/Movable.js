@@ -12,14 +12,6 @@ var Asteroids;
             const offset = this.vel.copy();
             offset.scale(_timeslice);
             this.pos.add(offset);
-            if (this.pos.x < 0)
-                this.pos.x += Asteroids.crc2.canvas.width;
-            if (this.pos.y < 0)
-                this.pos.y += Asteroids.crc2.canvas.height;
-            if (this.pos.x > Asteroids.crc2.canvas.width)
-                this.pos.x -= Asteroids.crc2.canvas.width;
-            if (this.pos.y > Asteroids.crc2.canvas.height)
-                this.pos.y -= Asteroids.crc2.canvas.height;
         }
         draw() {
             // to be implemented by subclasses

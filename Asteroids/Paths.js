@@ -18,6 +18,8 @@ var Asteroids;
     function createPaths() {
         Asteroids.asteroidPaths = createAsteroidPaths(Asteroids.shapesAsteroids);
         Asteroids.ufoPath = createUfoPath();
+        Asteroids.shipPath = createShipPath();
+        Asteroids.exposionPath = createExplosionPath();
     }
     Asteroids.createPaths = createPaths;
     function createAsteroidPaths(_shapes) {
@@ -55,6 +57,28 @@ var Asteroids;
         path.closePath();
         path.moveTo(4, 25);
         path.lineTo(59, 25);
+        path.closePath();
+        return path;
+    }
+    function createShipPath() {
+        let path = new Path2D();
+        path.moveTo(15, 0);
+        path.lineTo(-10, -10);
+        path.lineTo(-5, 0);
+        path.lineTo(-10, 10);
+        path.closePath();
+        return path;
+    }
+    function createExplosionPath() {
+        let path = new Path2D();
+        path.moveTo(0, -30);
+        path.lineTo(10, -10);
+        path.lineTo(30, 0);
+        path.lineTo(10, 10);
+        path.lineTo(0, 30);
+        path.lineTo(-10, 10);
+        path.lineTo(-30, 0);
+        path.lineTo(-10, -10);
         path.closePath();
         return path;
     }

@@ -25,6 +25,14 @@ var Asteroids;
         copy() {
             return new Vector(this.x, this.y);
         }
+        random(_maxX, _maxY) {
+            this.x = Math.random() * _maxX;
+            this.y = Math.random() * _maxY;
+        }
+        roundrandom(_maxX, _maxY) {
+            this.x = Math.floor(Math.random() * (_maxX + 1));
+            this.y = Math.floor(Math.random() * (_maxY + 1));
+        }
     }
     Asteroids.Vector = Vector;
 })(Asteroids || (Asteroids = {}));
