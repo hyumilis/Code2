@@ -4,9 +4,13 @@ var Asteroids;
     class Movable {
         pos;
         vel;
+        whatAmI;
+        expandeble;
         constructor() {
+            this.whatAmI = "movable";
             this.pos = new Asteroids.Vector(0, 0);
             this.vel = new Asteroids.Vector(this.randomvelocityvalue(10, 40), this.randomvelocityvalue(10, 40));
+            this.expandeble = false;
         }
         move(_timeslice) {
             const offset = this.vel.copy();

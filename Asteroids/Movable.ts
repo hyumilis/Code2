@@ -3,10 +3,14 @@ namespace Asteroids {
     export class Movable {
         public pos: Vector;
         public vel: Vector;
+        public whatAmI: string;
+        public expandeble: boolean;
 
         public constructor() {
+            this.whatAmI = "movable";
             this.pos = new Vector(0, 0);
             this.vel = new Vector(this.randomvelocityvalue(10, 40), this.randomvelocityvalue(10, 40));
+            this.expandeble = false;
         }
         public move(_timeslice: number): void {
             const offset: Vector = this.vel.copy();

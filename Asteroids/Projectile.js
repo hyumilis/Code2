@@ -3,17 +3,20 @@ var Asteroids;
 (function (Asteroids) {
     class Projectile extends Asteroids.Movable {
         lifeTime;
-        constructor() {
+        constructor(_origin, _vel) {
             super();
+            this.whatAmI = "projectile";
             this.lifeTime = 3;
-            this.vel = this.vel.copy();
+            this.vel = _vel.copy();
+            this.pos = _origin;
         }
         move(_timeslice) {
             super.move(_timeslice);
             this.lifeTime -= _timeslice;
             if (this.lifeTime <= 0) {
-                this.explode();
                 this.vel = new Asteroids.Vector(0, 0);
+                this.explode();
+                this.expandeble = true;
             }
         }
         draw() {
@@ -25,7 +28,7 @@ var Asteroids;
         explode() {
             Asteroids.crc2.save();
             Asteroids.crc2.translate(this.pos.x, this.pos.y);
-            Asteroids.crc2.translate(-5, -5);
+            Asteroids.crc2.translate(0, 0);
             Asteroids.crc2.stroke(Asteroids.exposionPath);
             Asteroids.crc2.restore();
         }

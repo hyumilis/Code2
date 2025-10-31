@@ -77,14 +77,14 @@ namespace Asteroids {
     }
     function createExplosionPath(): Path2D {
         let path: Path2D = new Path2D();
-        path.moveTo(0, -30);
-        path.lineTo(10, -10);
-        path.lineTo(30, 0);
-        path.lineTo(10, 10);
-        path.lineTo(0, 30);
-        path.lineTo(-10, 10);
-        path.lineTo(-30, 0);
-        path.lineTo(-10, -10);
+        path.moveTo(0, -3);
+        path.lineTo(1, -1);
+        path.lineTo(3, 0);
+        path.lineTo(1, 1);
+        path.lineTo(0, 3);
+        path.lineTo(-1, 1);
+        path.lineTo(-3, 0);
+        path.lineTo(-1, -1);
         path.closePath();
         return path;
     }

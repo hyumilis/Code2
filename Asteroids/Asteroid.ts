@@ -3,9 +3,11 @@ namespace Asteroids {
     export class Asteroid extends Movable {
         public size!: number;
         public type!: number;
+        
 
         constructor() {
             super();
+            this.whatAmI = "asteroid";
             this.pos = new Vector(Math.floor(Math.random() * crc2.canvas.width), 0);
             this.vel = new Vector(this.randomvelocityvalue(10, 40), this.randomvelocityvalue(10, 40));
             this.size = Math.random() * 1 + 0.5;

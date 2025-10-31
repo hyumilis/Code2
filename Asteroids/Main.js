@@ -2,7 +2,8 @@
 var Asteroids;
 (function (Asteroids) {
     window.addEventListener("load", handleLoad);
-    let asteroids = [];
+    let movables = [];
+    let projectile;
     function handleLoad(_event) {
         let canvas = document.getElementById("playfield");
         if (!canvas) {
@@ -23,15 +24,19 @@ var Asteroids;
     }
     function update() {
         console.log("Update");
+        let asteroidcount = 0;
         Asteroids.crc2.fillRect(0, 0, Asteroids.crc2.canvas.width, Asteroids.crc2.canvas.height);
         let ship = new Asteroids.Ship();
         Asteroids.crc2.lineWidth = 2;
         ship.draw();
-        for (let asteroid of asteroids) {
-            asteroid.move(1 / 50);
-            asteroid.draw();
+        for (let instance of movables) {
+            instance.move(1 / 50);
+            instance.draw();
+            if (instance instanceof Asteroids.Asteroid) {
+                asteroidcount++;
+            }
         }
-        if (asteroids.length < 4) {
+        if (asteroidcount < 4) {
             createAsteroids(2);
         }
     }
@@ -47,8 +52,8 @@ var Asteroids;
         Asteroids.crc2.stroke();
     }
     function getAsteroidHit(_hotspot) {
-        for (let asteroid of asteroids) {
-            if (asteroid.isHit(_hotspot)) {
+        for (let asteroid of movables) {
+            if (asteroid instanceof Asteroids.Asteroid && asteroid.isHit(_hotspot)) {
                 return asteroid;
             }
         }
@@ -61,16 +66,16 @@ var Asteroids;
                 fragment.size = _asteroid.size / 2;
                 fragment.pos = _asteroid.pos.copy();
                 fragment.vel.set(fragment.randomvelocityvalue(_asteroid.vel.x, _asteroid.vel.x * 2), fragment.randomvelocityvalue(_asteroid.vel.y, _asteroid.vel.y * 2));
-                asteroids.push(fragment);
+                movables.push(fragment);
             }
         }
-        let index = asteroids.indexOf(_asteroid);
-        asteroids.splice(index, 1);
+        let index = movables.indexOf(_asteroid);
+        movables.splice(index, 1);
     }
     function createAsteroids(_nAsteroids) {
         for (let i = 0; i < _nAsteroids; i++) {
             let asteroid = new Asteroids.Asteroid();
-            asteroids.push(asteroid);
+            movables.push(asteroid);
         }
     }
     function shootproj(_event) {
