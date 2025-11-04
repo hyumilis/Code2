@@ -16,7 +16,7 @@ namespace Asteroids {
         crc2.strokeStyle = "white";
         crc2.lineWidth = 2;
 
-        canvas.addEventListener("mousedown", shootproj);
+        canvas.addEventListener("feuerfrei", hndlufoshoot);
         canvas.addEventListener("mouseup", shootLaser);
         //canvas.addEventListener("keypress", handleKeypress);
         //canvas.addEventListener("mousemove", setHeading);
@@ -101,16 +101,20 @@ namespace Asteroids {
         }
     }
 
-    function createUfo(){
+    function createUfo() {
         let newufo: Ufo = new Ufo;
         movables.push(newufo);
     }
 
-    function shootproj(_event: MouseEvent): void {
+    function hndlufoshoot(_event: Event): void {
+        let ufo: Ufo = (<CustomEvent>_event).detail.ufo;
+        shootproj(ufo.pos);
+    }
+
+    function shootproj(_ufopos: Vector): void {
         console.log("Shoot Projectile");
-        let origin: Vector = new Vector(_event.clientX - crc2.canvas.offsetLeft, _event.clientY - crc2.canvas.offsetTop);
-        let vel: Vector = new Vector(0, 0);
-        vel.random(100, 100);
+        let origin: Vector = new Vector(_ufopos.x, _ufopos.y);
+        let vel: Vector = Vector.getRandom(100, 100);
         let proj = new Projectile(origin, vel);
         movables.push(proj);
     }

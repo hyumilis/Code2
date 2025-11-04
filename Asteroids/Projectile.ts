@@ -1,19 +1,20 @@
 namespace Asteroids {
-
     export class Projectile extends Movable {
-        public lifeTime: number;
+        public static lifeTime: number = 3;
+        private remainingLifeTime: number;
+        
 
         constructor(_origin:Vector,_vel:Vector) {
             super();
             this.whatAmI = "projectile";
-            this.lifeTime = 3;
+            this.remainingLifeTime = Projectile.lifeTime;
             this.vel = _vel.copy();
             this.pos = _origin;
         }
         public move(_timeslice: number): void {
             super.move(_timeslice);
-            this.lifeTime -= _timeslice;
-            if (this.lifeTime <= 0) {
+            this.remainingLifeTime -= _timeslice;
+            if (this.remainingLifeTime <= 0) {
                 this.vel = new Vector(0, 0);
                 this.explode();
                 this.expandeble = true;

@@ -1,14 +1,19 @@
 "use strict";
 var Asteroids;
 (function (Asteroids) {
+    let innerTime = 0;
     class Ufo extends Asteroids.Movable {
         constructor() {
             super();
             this.whatAmI = "Ufo";
-            this.pos = new Asteroids.Vector(0, Math.floor(Math.random() * Asteroids.crc2.canvas.height));
+            this.pos = new Asteroids.Vector(0, Math.floor(Math.random() * (Asteroids.crc2.canvas.height / 10)) * 10);
             this.vel = new Asteroids.Vector(60 * (Math.random() < 0.5 ? -1 : 1), 0);
         }
         move(_timeslice) {
+            this.randommoveupdown(250);
+            if (Math.random() < 0.01) {
+                this.shoot();
+            }
             super.move(_timeslice);
             if (this.pos.x < 0)
                 this.pos.x += Asteroids.crc2.canvas.width;
@@ -35,7 +40,23 @@ var Asteroids;
                 this.expandeble = true;
             }
         }
+        shoot() {
+            let feuerfrei = new CustomEvent("feuerfrei", { detail: { ufo: this } });
+            Asteroids.crc2.canvas.dispatchEvent(feuerfrei);
+        }
+        randommoveupdown(_timebetweenjumps) {
+            innerTime++;
+            if (innerTime > (_timebetweenjumps + 150)) {
+                if (Math.random() < 0.02) {
+                    this.vel.y = this.vel.y + (Math.random() < 0.5 ? -1 : 1) * 30;
+                    innerTime = 0;
+                }
+            }
+            else if (innerTime > 150) {
+                this.vel.y = 0;
+            }
+        }
     }
     Asteroids.Ufo = Ufo;
 })(Asteroids || (Asteroids = {}));
-//# sourceMappingURL=UFO.js.map
+//# sourceMappingURL=Ufo.js.map

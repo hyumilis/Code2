@@ -14,7 +14,7 @@ var Asteroids;
         Asteroids.crc2.fillStyle = "black";
         Asteroids.crc2.strokeStyle = "white";
         Asteroids.crc2.lineWidth = 2;
-        canvas.addEventListener("mousedown", shootproj);
+        canvas.addEventListener("feuerfrei", hndlufoshoot);
         canvas.addEventListener("mouseup", shootLaser);
         //canvas.addEventListener("keypress", handleKeypress);
         //canvas.addEventListener("mousemove", setHeading);
@@ -93,11 +93,14 @@ var Asteroids;
         let newufo = new Asteroids.Ufo;
         movables.push(newufo);
     }
-    function shootproj(_event) {
+    function hndlufoshoot(_event) {
+        let ufo = _event.detail.ufo;
+        shootproj(ufo.pos);
+    }
+    function shootproj(_ufopos) {
         console.log("Shoot Projectile");
-        let origin = new Asteroids.Vector(_event.clientX - Asteroids.crc2.canvas.offsetLeft, _event.clientY - Asteroids.crc2.canvas.offsetTop);
-        let vel = new Asteroids.Vector(0, 0);
-        vel.random(100, 100);
+        let origin = new Asteroids.Vector(_ufopos.x, _ufopos.y);
+        let vel = Asteroids.Vector.getRandom(100, 100);
         let proj = new Asteroids.Projectile(origin, vel);
         movables.push(proj);
     }

@@ -2,18 +2,19 @@
 var Asteroids;
 (function (Asteroids) {
     class Projectile extends Asteroids.Movable {
-        lifeTime;
+        static lifeTime = 3;
+        remainingLifeTime;
         constructor(_origin, _vel) {
             super();
             this.whatAmI = "projectile";
-            this.lifeTime = 3;
+            this.remainingLifeTime = Projectile.lifeTime;
             this.vel = _vel.copy();
             this.pos = _origin;
         }
         move(_timeslice) {
             super.move(_timeslice);
-            this.lifeTime -= _timeslice;
-            if (this.lifeTime <= 0) {
+            this.remainingLifeTime -= _timeslice;
+            if (this.remainingLifeTime <= 0) {
                 this.vel = new Asteroids.Vector(0, 0);
                 this.explode();
                 this.expandeble = true;

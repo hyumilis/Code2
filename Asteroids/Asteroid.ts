@@ -2,10 +2,10 @@ namespace Asteroids {
 
     export class Asteroid extends Movable {
         public size!: number;
-        public type!: number;
+        private type!: number;
         
 
-        constructor() {
+        public constructor() {
             super();
             this.whatAmI = "asteroid";
             this.pos = new Vector(Math.floor(Math.random() * crc2.canvas.width), 0);

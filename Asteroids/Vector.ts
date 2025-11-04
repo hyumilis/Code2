@@ -7,6 +7,13 @@ namespace Asteroids {
             this.set(_x, _y);
         }
 
+        public static getRandom(_minLength: number, _maxLenght: number): Vector {
+            let vec: Vector = new Vector(0, 0);
+            let direction: number = Math.random() * 2 * Math.PI;
+            vec.set(Math.cos(direction), Math.sin(direction));
+            vec.scale(_minLength + Math.random() * (_maxLenght - _minLength));
+            return vec;
+        }
         public set(_x: number, _y: number): void {
             this.x = _x;
             this.y = _y;
@@ -32,6 +39,10 @@ namespace Asteroids {
         public roundrandom(_maxX: number, _maxY: number): void {
             this.x = Math.floor(Math.random() * (_maxX + 1));
             this.y = Math.floor(Math.random() * (_maxY + 1));
+        }
+        public normalizedPlusMinusRandom() {
+            this.x = Math.floor(Math.sin(Math.random() * Math.PI));
+            this.y = Math.floor(Math.cos(Math.random() * Math.PI));
         }
     }
 }
