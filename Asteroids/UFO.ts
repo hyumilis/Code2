@@ -1,7 +1,8 @@
 namespace Asteroids {
-    let innerTime: number = 0;
-
     export class Ufo extends Movable {
+        private innerTime: number = 0;
+        public static reloadspeed: number = 40;
+        private reload = Ufo.reloadspeed;
 
         public constructor() {
             super();
@@ -12,9 +13,13 @@ namespace Asteroids {
 
         public move(_timeslice: number): void {
             this.randommoveupdown(250);
-            if (Math.random()<0.01){
-                this.shoot();
+            if (this.reload <= 0) {
+                if (Math.random() < 0.03) {
+                    this.shoot();
+                    this.reload = Ufo.reloadspeed;
+                }
             }
+            this.reload --;
             super.move(_timeslice);
             if (this.pos.x < 0)
                 this.pos.x += crc2.canvas.width;
@@ -46,14 +51,14 @@ namespace Asteroids {
             crc2.canvas.dispatchEvent(feuerfrei);
         }
         public randommoveupdown(_timebetweenjumps: number): void {
-            innerTime++;
-            if (innerTime > (_timebetweenjumps + 150)) {
+            this.innerTime++;
+            if (this.innerTime > (_timebetweenjumps + 150)) {
                 if (Math.random() < 0.02) {
                     this.vel.y = this.vel.y + (Math.random() < 0.5 ? -1 : 1) * 30;
-                    innerTime = 0;
+                    this.innerTime = 0;
                 }
             }
-            else if (innerTime > 150) {
+            else if (this.innerTime > 150) {
                 this.vel.y = 0;
             }
         }

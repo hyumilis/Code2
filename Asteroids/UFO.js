@@ -1,8 +1,10 @@
 "use strict";
 var Asteroids;
 (function (Asteroids) {
-    let innerTime = 0;
     class Ufo extends Asteroids.Movable {
+        innerTime = 0;
+        static reloadspeed = 40;
+        reload = Ufo.reloadspeed;
         constructor() {
             super();
             this.whatAmI = "Ufo";
@@ -11,9 +13,13 @@ var Asteroids;
         }
         move(_timeslice) {
             this.randommoveupdown(250);
-            if (Math.random() < 0.01) {
-                this.shoot();
+            if (this.reload <= 0) {
+                if (Math.random() < 0.03) {
+                    this.shoot();
+                    this.reload = Ufo.reloadspeed;
+                }
             }
+            this.reload--;
             super.move(_timeslice);
             if (this.pos.x < 0)
                 this.pos.x += Asteroids.crc2.canvas.width;
@@ -45,14 +51,14 @@ var Asteroids;
             Asteroids.crc2.canvas.dispatchEvent(feuerfrei);
         }
         randommoveupdown(_timebetweenjumps) {
-            innerTime++;
-            if (innerTime > (_timebetweenjumps + 150)) {
+            this.innerTime++;
+            if (this.innerTime > (_timebetweenjumps + 150)) {
                 if (Math.random() < 0.02) {
                     this.vel.y = this.vel.y + (Math.random() < 0.5 ? -1 : 1) * 30;
-                    innerTime = 0;
+                    this.innerTime = 0;
                 }
             }
-            else if (innerTime > 150) {
+            else if (this.innerTime > 150) {
                 this.vel.y = 0;
             }
         }
