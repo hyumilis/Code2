@@ -2,10 +2,10 @@ body{
     background-color: #252530;
 }
 canvas {
-    background-color: aquamarine;
-    border-color: #c89e22;
-    border-top: 20px;
+    border-color:solid #c89e22;
     border-radius: 5%;
+    background-color: aquamarine;
+    border-width:0 10px;
     width: 800px;
     height: 600px;
 }
