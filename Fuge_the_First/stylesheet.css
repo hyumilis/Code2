@@ -1,0 +1,14 @@
+body{
+    background-color: #252530;
+}
+canvas {
+    background-color: aquamarine;
+    border-color: #c89e22;
+    border-top: 20px;
+    border-radius: 5%;
+    width: 800px;
+    height: 600px;
+}
+h1{
+    color: #c89e22;
+}
